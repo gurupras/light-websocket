@@ -1,0 +1,31 @@
+{
+  "name": "light-websocket",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "debug:test": "node --inspect-brk=0.0.0.0:9634 ./node_modules/jest/bin/jest.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.7.5",
+    "@types/jest": "^24.0.23",
+    "babel-jest": "^24.9.0",
+    "eslint": "^6.7.2",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^23.1.1",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "jest": "^24.9.0",
+    "jest-extended": "^0.11.2",
+    "portfinder": "^1.0.25",
+    "ws": "^7.2.0"
+  },
+  "dependencies": {
+    "wildemitter": "^1.2.1"
+  }
+}
