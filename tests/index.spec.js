@@ -169,6 +169,13 @@ describe('LightWebSocket', () => {
             }
           }, wsClient, wsServer)
         })
+        test('Null data is handled correctly', async () => {
+          await testData('null-test', null, wsClient, wsServer)
+        })
+
+        test('Undefined data is handled correctly', async () => {
+          await testData('null-test', undefined, wsClient, wsServer)
+        })
       })
 
       describe('Server -> Client', () => {
@@ -192,6 +199,12 @@ describe('LightWebSocket', () => {
               }
             }
           }, wsServer, wsClient)
+        })
+        test('Null data is handled correctly', async () => {
+          await testData('null-test', null, wsServer, wsClient)
+        })
+        test('Undefined data is handled correctly', async () => {
+          await testData('null-test', undefined, wsServer, wsClient)
         })
       })
     })
