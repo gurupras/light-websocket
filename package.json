@@ -2,8 +2,10 @@
   "name": "light-websocket",
   "version": "0.0.1",
   "description": "",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
+    "build": "webpack",
+    "bundle-report": "webpack-bundle-analyzer --host localhost --port 4200 dist/stats.json",
     "test": "jest",
     "debug:test": "node --inspect-brk=0.0.0.0:9634 ./node_modules/jest/bin/jest.js"
   },
@@ -11,8 +13,18 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.7.5",
+    "@babel/plugin-transform-runtime": "^7.7.6",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/runtime": "^7.7.6",
     "@types/jest": "^24.0.23",
     "babel-jest": "^24.9.0",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-transform-es2015-block-scoped-functions": "^6.22.0",
+    "babel-plugin-transform-es2015-block-scoping": "^6.26.0",
+    "babel-plugin-transform-es2015-constants": "^6.1.4",
+    "babel-plugin-transform-es2015-parameters": "^6.24.1",
+    "babel-plugin-transform-es2015-shorthand-properties": "^6.24.1",
+    "babel-plugin-transform-es2015-spread": "^6.22.0",
     "eslint": "^6.7.2",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.18.2",
@@ -23,6 +35,10 @@
     "jest": "^24.9.0",
     "jest-extended": "^0.11.2",
     "portfinder": "^1.0.25",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.41.2",
+    "webpack-bundle-analyzer": "^3.6.0",
+    "webpack-cli": "^3.3.10",
     "ws": "^7.2.0"
   },
   "dependencies": {
