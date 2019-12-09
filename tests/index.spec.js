@@ -1,21 +1,7 @@
 const WebSocket = require('ws')
 const portfinder = require('portfinder')
 const LightWebSocket = require('../lib/index')
-
-async function testForNoEvent(obj, evt, timeout = 250) {
-  let failed = false
-  function listener() { 
-    obj.off(evt, listener)
-    failed = true 
-  }
-  obj.on(evt, listener)
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      failed ? reject(new Error(`Should not have received event '${evt}'`)) : resolve()
-    }, timeout)
-  })
-}
-
+const { messageToBytes } = LightWebSocket
 
 describe('LightWebSocket', () => {
   describe('Standalone', () => {
@@ -27,20 +13,19 @@ describe('LightWebSocket', () => {
       expect(socket.onmessage).not.toHaveBeenCalled()
     })
 
-    test(`Does not fail when no 'onmessage' handler is specified`, async () => {
+    test('Does not fail when no \'onmessage\' handler is specified', async () => {
       const msg = {
-        data: JSON.stringify({
+        data: messageToBytes({
           event: 'test',
           data: 'test-123'
         })
       }
       const ws = {}
-      const socket = new LightWebSocket(ws)
       expect(() => ws.onmessage(msg)).not.toThrow()
     })
-    test(`Calls 'onmessage' when a valid message is received`, async () => {
+    test('Calls \'onmessage\' when a valid message is received', async () => {
       const msg = {
-        data: JSON.stringify({
+        data: messageToBytes({
           event: 'test',
           data: 'test-123'
         })
@@ -53,14 +38,13 @@ describe('LightWebSocket', () => {
       expect(socket.onmessage).toHaveBeenCalledWith(msg)
     })
 
-    test(`Does not fail when no 'onerror' handler is specified`, async () => {
+    test('Does not fail when no \'onerror\' handler is specified', async () => {
       const data = 'non-json-string'
       const ws = {}
-      const socket = new LightWebSocket(ws)
       expect(() => ws.onerror(data)).not.toThrow()
     })
 
-    test(`Calls 'onerror' when an error is encountered`, async () => {
+    test('Calls \'onerror\' when an error is encountered', async () => {
       const data = 'non-json-string'
       const ws = {}
       const socket = new LightWebSocket(ws)
@@ -70,16 +54,16 @@ describe('LightWebSocket', () => {
       expect(socket.onerror).toHaveBeenCalledWith(data)
     })
 
-    test(`Off with unregistered handler is a no-op`, async () => {
+    test('Off with unregistered handler is a no-op', async () => {
       const ws = {}
       const socket = new LightWebSocket(ws)
       expect(() => socket.off('test', () => {})).not.toThrow()
     })
 
-    test(`Off removes handlers as expected`, async () => {
+    test('Off removes handlers as expected', async () => {
       const data = 'test-123'
       const msg = {
-        data: JSON.stringify({
+        data: messageToBytes({
           event: 'test',
           data
         })
