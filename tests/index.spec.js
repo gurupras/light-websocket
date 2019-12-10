@@ -21,6 +21,7 @@ describe('LightWebSocket', () => {
         })
       }
       const ws = {}
+      const socket = new LightWebSocket(ws)
       expect(() => ws.onmessage(msg)).not.toThrow()
     })
     test('Calls \'onmessage\' when a valid message is received', async () => {
@@ -41,6 +42,7 @@ describe('LightWebSocket', () => {
     test('Does not fail when no \'onerror\' handler is specified', async () => {
       const data = 'non-json-string'
       const ws = {}
+      const socket = new LightWebSocket(ws)
       expect(() => ws.onerror(data)).not.toThrow()
     })
 
